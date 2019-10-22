@@ -34,10 +34,10 @@ const Members = lazy(async () => {
 })
 
 export const routes = {
-    '/complaints': () => <Complaints />,
-    '/clubs*': () => <Clubs />,
-    '/students': () => <Students />, 
-    '/notifications': () => <Notifications />,
-    '/login': () => <Login />,
-    '/members': () => <Members />
+    '/admin/complaints': () => <Complaints />,
+    '/admin/clubs*': () => <Clubs />,
+    '/admin/students': () => <Students />, 
+    '/admin/notifications': () => <Notifications />,
+    '/admin/login': () => <Login />,
+    '/admin/members': () => <Members />
 }

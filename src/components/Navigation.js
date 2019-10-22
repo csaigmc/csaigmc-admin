@@ -62,7 +62,7 @@ export const Navigation = () => {
     const handleLogout = () => {
         logout()
         removeItem("authToken")
-        navigate('/')
+        navigate('/admin')
     } 
 
     return (

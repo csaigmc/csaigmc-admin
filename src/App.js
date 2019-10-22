@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container'
 
 function _App() {
 
-  useRedirect('/', '/students')
+  useRedirect('/', '/admin/students')
   const routerResult = useRoutes(routes)
   const {user} = useLoginContext()
 
