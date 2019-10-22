@@ -28,10 +28,16 @@ const Login = lazy(async () => {
     return data
 })
 
+const Members = lazy(async () => {
+    const data = await import('components/Members/Members')
+    return data
+})
+
 export const routes = {
     '/complaints': () => <Complaints />,
     '/clubs*': () => <Clubs />,
     '/students': () => <Students />, 
     '/notifications': () => <Notifications />,
-    '/login': () => <Login />
+    '/login': () => <Login />,
+    '/members': () => <Members />
 }

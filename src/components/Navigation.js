@@ -34,8 +34,9 @@ const titles = {
     '/notifications': "Notifications",
     '/clubs/enigma': 'Enigma',
     '/clubs/isis': 'ISIS',
-    '/clubs/membersclub': 'Members Club',
-    '/clubs/arts': 'Arts'
+    '/clubs/memersclub': 'Memers Club',
+    '/clubs/arts': 'Arts',
+    '/members': "Members"
 }
 
 const getTitle = (string) => {
@@ -84,6 +85,9 @@ export const Navigation = () => {
                 </ListSubheader>
             } className={classes.root}>
                 <Divider />
+                <ListItem button href="/members" component={A} >
+                    <ListItemText primary="Members" />
+                </ListItem>
                 <ListItem button href="/complaints" component={A} >
                     <ListItemText primary="Complaints" />
                 </ListItem>
@@ -113,8 +117,8 @@ export const Navigation = () => {
                     <ListItem className={classes.nested} button href="/clubs/isis" component={A}>
                         <ListItemText  primary="ISIS" />
                     </ListItem>
-                    <ListItem className={classes.nested} button href="/clubs/membersclub" component={A}>
-                        <ListItemText primary="Members Club" />
+                    <ListItem className={classes.nested} button href="/clubs/memersclub" component={A}>
+                        <ListItemText primary="Memers Club" />
                     </ListItem>
                     <ListItem className={classes.nested} button href="/clubs/arts" component={A}>
                         <ListItemText primary="Arts" />
