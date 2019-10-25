@@ -13,8 +13,6 @@ import { useLoginContext } from 'utils/context';
 import CssBaseline from '@material-ui/core/CssBaseline' 
 import Container from '@material-ui/core/Container'
 
-setBasepath('https://csaigmc.github.io/admin')
-
 function _App() {
 
   useRedirect('/', '/students')
