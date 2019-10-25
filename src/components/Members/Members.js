@@ -180,17 +180,18 @@ const Members = () => {
                                     <TextField margin="normal" noWrap fullWidth label="URL" required name={`url_path`} value={fields["url_path"]} onChange={onChange} />
                                 </Grid>
                                 <FormControl fullWidth>
-                                <InputLabel>Art Format</InputLabel>
+                                <InputLabel>Format</InputLabel>
                                     <Select value={fields.art_format}
                                     onChange={onChange} inputProps={{name: "art_format"}}>
                                         <MenuItem value={"image"}>Image</MenuItem>
                                     </Select>
                                 </FormControl>
                                 <FormControl fullWidth>
-                                <InputLabel>Art Type</InputLabel>
+                                <InputLabel>CSA Member Type</InputLabel>
                                     <Select value={fields.art_type}
                                     onChange={onChange} inputProps={{name: "art_type"}}>
-                                        <MenuItem value={"student"}>Members</MenuItem>
+                                        <MenuItem value={"student"}>Student</MenuItem>
+                                        <MenuItem value={"teacher"}>Teacher</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>

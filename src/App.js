@@ -1,6 +1,6 @@
 import React, {Suspense, Fragment} from 'react';
 import './App.css';
-import { setBasepath,useRoutes, useRedirect } from 'hookrouter'
+import {setBasepath,useRoutes, useRedirect } from 'hookrouter'
 import { routes } from './utils/routes';
 import { NotFoundPage } from 'components/NotFoundPage';
 import { Navigation } from 'components/Navigation';
@@ -12,6 +12,8 @@ import { useLoginContext } from 'utils/context';
 
 import CssBaseline from '@material-ui/core/CssBaseline' 
 import Container from '@material-ui/core/Container'
+
+// setBasepath('http://localhost:8000/admin')
 
 function _App() {
 

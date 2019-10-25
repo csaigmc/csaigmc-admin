@@ -100,7 +100,7 @@ const Login = () => {
                     </Grid>
                     <Grid item xs={12} className={`${classes.pt1}`}> 
                         {isNotEmpty(message) ? <Typography color="error" variant="caption">{message}</Typography>: null }
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <TextField className={`${classes.pb1}`} fullWidth label="Username" name="username" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                             <TextField fullWidth label="Password" name="password" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
                             <div style={{textAlign: 'right'}}>

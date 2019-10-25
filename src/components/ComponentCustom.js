@@ -58,8 +58,45 @@ export const ComponentCustom = ({
     })
     
     const [updateDetails, sup] = useMutation(updateObject.update_query)
-    const [deleteDetails, delNews] = useMutation(deleteObject.delete_query)
-    const [addDetails, addNews] = useMutation(addObject.add_query)
+    const [deleteDetails, delNews] = useMutation(deleteObject.delete_query, {
+        update(cache, data) {
+
+            // const queryData = cache.readQuery({
+            //     query: queryObject.query_query,
+            //     variables: {
+            //         skip: 0,
+            //         limit: LIMIT,
+            //         ...queryObject.query_params
+            //     }   
+            // })
+
+            console.log("___DELETE___")
+            console.log(data)
+            // console.log(queryData)
+
+            cache.writeQuery({
+                query: queryObject
+            })
+        }
+    })
+    const [addDetails, addNews] = useMutation(addObject.add_query, {
+        update(cache, data) {
+
+            // const queryData = cache.readQuery({
+            //     query: queryObject.query_query,
+            //     variables: {
+            //         skip: 0,
+            //         limit: LIMIT,
+            //         ...queryObject.query_params
+            //     }   
+            // })
+
+            console.log("___ADD___")
+            console.log(data)
+            // console.log(queryData)
+
+        }
+    })
 
     const preset_styles = useStyles()
     const classes = cstyles()
