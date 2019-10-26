@@ -102,12 +102,7 @@ const Gallery = () => {
                 />
             <CardContent>
                 <Typography variant="overline">Preview</Typography>
-                {
-                    item.art_type === 'image' ?
-                    <img style={{width: "100%", maxHeight: "360px"}} src={item.url_path} /> :
-                    <iframe style={{maxHeight: "360px", width: "100%"}} src={item.url_path}>
-                    </iframe>
-                }
+                <img style={{width: "100%", maxHeight: "360px"}} src={item.url_path} />
                 <Link target="_blank" rel="noreferrer" href={item.url_path}>{item.art_type}</Link>
                 <Typography>Created On: {fdate}</Typography>
             </CardContent>
