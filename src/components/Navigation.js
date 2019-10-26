@@ -29,14 +29,16 @@ const useStyles = makeStyles((theme) => ({
 })) 
 
 const titles = {
-    '/complaints': 'Complaints',
-    '/students': 'Students',
-    '/notifications': "Notifications",
-    '/clubs/enigma': 'Enigma',
-    '/clubs/isis': 'ISIS',
-    '/clubs/memersclub': 'Memers Club',
-    '/clubs/arts': 'Arts',
-    '/members': "Members"
+    '/admin/gallery': 'Gallery',
+    '/admin/advisory': 'CSA Advisory',
+    '/admin/complaints': 'Complaints',
+    '/admin/students': 'Students',
+    '/admin/notifications': "Notifications",
+    '/admin/clubs/enigma': 'Enigma',
+    '/admin/clubs/isis': 'ISIS',
+    '/admin/clubs/memersclub': 'Memers Club',
+    '/admin/clubs/arts': 'Arts',
+    '/admin/members': "CSA Members"
 }
 
 const getTitle = (string) => {
@@ -85,16 +87,22 @@ export const Navigation = () => {
                 </ListSubheader>
             } className={classes.root}>
                 <Divider />
-                <ListItem button href="/members" component={A} >
-                    <ListItemText primary="Members" />
+                <ListItem button href="/admin/members" component={A} >
+                    <ListItemText primary="CSA Members" />
                 </ListItem>
-                <ListItem button href="/complaints" component={A} >
+                <ListItem button href="/admin/advisory" component={A} >
+                    <ListItemText primary="CSA Advisory" />
+                </ListItem>
+                <ListItem button href="/admin/gallery" component={A} >
+                    <ListItemText primary="Gallery" />
+                </ListItem>
+                <ListItem button href="/admin/complaints" component={A} >
                     <ListItemText primary="Complaints" />
                 </ListItem>
-                <ListItem button href="/students" component={A}>
+                <ListItem button href="/admin/students" component={A}>
                     <ListItemText primary="Students"  />
                 </ListItem>
-                <ListItem button href="/notifications" component={A}>
+                <ListItem button href="/admin/notifications" component={A}>
                     <ListItemText primary="Notifications" />
                 </ListItem>
                 <ListItem button onClick={() => {
@@ -111,16 +119,16 @@ export const Navigation = () => {
                 </ListItem>
                 <Collapse in={collapseIsOpen} timeout="auto">
                     <List component="div" disablePadding>
-                    <ListItem className={classes.nested} button href="/clubs/enigma" component={A}>
+                    <ListItem className={classes.nested} button href="/admin/clubs/enigma" component={A}>
                         <ListItemText primary="Enigma" />
                     </ListItem>
-                    <ListItem className={classes.nested} button href="/clubs/isis" component={A}>
+                    <ListItem className={classes.nested} button href="/admin/clubs/isis" component={A}>
                         <ListItemText  primary="ISIS" />
                     </ListItem>
-                    <ListItem className={classes.nested} button href="/clubs/memersclub" component={A}>
+                    <ListItem className={classes.nested} button href="/admin/clubs/memersclub" component={A}>
                         <ListItemText primary="Memers Club" />
                     </ListItem>
-                    <ListItem className={classes.nested} button href="/clubs/arts" component={A}>
+                    <ListItem className={classes.nested} button href="/admin/clubs/arts" component={A}>
                         <ListItemText primary="Arts" />
                     </ListItem>
                     </List>

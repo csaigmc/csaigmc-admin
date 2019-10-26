@@ -3,10 +3,6 @@ import { usePageLoadingContext } from './context'
 import { loadfile } from './loadfile'
 
 
-/**
- * TODO
- * Show progress bar when loading another page 
- */
 const Complaints = lazy(async () => {
     const data = await import('components/Complaints/Complaints')
     return data
@@ -32,12 +28,22 @@ const Members = lazy(async () => {
     const data = await import('components/Members/Members')
     return data
 })
+const Gallery = lazy(async () => {
+    const data = await import('components/Gallery/Gallery')
+    return data
+})
+const Advisory = lazy(async () => {
+    const data = await import('components/Advisory/Advisory')
+    return data
+})
 
 export const routes = {
-    '/complaints': () => <Complaints />,
-    '/clubs*': () => <Clubs />,
-    '/students': () => <Students />, 
-    '/notifications': () => <Notifications />,
-    '/login': () => <Login />,
-    '/members': () => <Members />
+    '/admin/complaints': () => <Complaints />,
+    '/admin/clubs*': () => <Clubs />,
+    '/admin/students': () => <Students />, 
+    '/admin/notifications': () => <Notifications />,
+    '/admin/login': () => <Login />,
+    '/admin/members': () => <Members />,
+    '/admin/gallery': () => <Gallery />,
+    '/admin/advisory': () => <Advisory />
 }

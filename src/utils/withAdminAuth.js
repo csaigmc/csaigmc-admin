@@ -12,7 +12,7 @@ export const withAdminAuth = (AdminComponent) => {
         if(loggedIn === true) {
             return <AdminComponent {...props}/>
         } else {
-            navigate('/login', true)
+            navigate('/admin/login', true)
             return <Login />    
         }
     }

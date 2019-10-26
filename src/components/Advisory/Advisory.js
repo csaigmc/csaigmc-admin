@@ -72,9 +72,17 @@ const fieldNameMapping = {
     "art_format": {value: "Format", required: true}
 }
 
-const Members = () => {
+const cStyles = makeStyles(() => ({
+    editor: {
+        fontFamily: "IBM Plex Mono, ubuntu mono, consolas, source code pro, monospace !important"
+    }
+}))
+
+const Gallery = () => {
 
     const preset_styles = useStyles()
+    const cstyles = cStyles()
+
 
     const renderHandler = (item, itemIndex, onClickEdit, onClickDelete) => {
 
@@ -94,7 +102,12 @@ const Members = () => {
                 />
             <CardContent>
                 <Typography variant="overline">Preview</Typography>
-                <img style={{width: "100%", maxHeight: "360px"}} src={item.url_path} /> 
+                {
+                    item.art_type === 'image' ?
+                    <img style={{width: "100%", maxHeight: "360px"}} src={item.url_path} /> :
+                    <iframe style={{maxHeight: "360px", width: "100%"}} src={item.url_path}>
+                    </iframe>
+                }
                 <Typography>{item.creator}</Typography>
                 <Typography variant="subtitle1">{item.about_creator}</Typography>
                 <Typography>Created On: {fdate}</Typography>
@@ -115,8 +128,8 @@ const Members = () => {
         <ComponentCustom 
             updateObject={{
                 update_query: UPDATE_ART,
-                error_message: "Error Upadting Student",
-                success_message: "Updated student!",
+                error_message: "Error Upadting Art",
+                success_message: "Updated Art!",
                 update_var_unique: "id",
                 update_var_info: "art"
             }}
@@ -125,8 +138,8 @@ const Members = () => {
                 delete_query: DELETE_ART,
                 delete_unique_var: "id",
                 delete_unique_field: "_id",
-                error_message: "Error deleting Student",
-                success_message: "Deleted Meme!"
+                error_message: "Error deleting Art",
+                success_message: "Deleted Art!"
             }}
 
             queryObject={{
@@ -135,14 +148,14 @@ const Members = () => {
                 query_tablename: "allArts",
                 forEachItem: renderHandler,
                 query_params: {
-                    type: "student"
+                    type: "teacher"
                 }
             }}
 
             addObject={{
                 add_query: ADD_ART,
-                error_message: "Error Adding Student",
-                success_message: "Added Student",
+                error_message: "Error Adding Article",
+                success_message: "Added Article",
                 add_var_info: "art"
             }}
 
@@ -172,10 +185,10 @@ const Members = () => {
                         <Grid item xs={12}>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <TextField margin="normal" noWrap fullWidth label="Creator" name={`creator`} value={fields["creator"]} onChange={onChange} />
+                                    <TextField margin="normal" noWrap fullWidth label="Creator" required name={`creator`} value={fields["creator"]} onChange={onChange} />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField margin="normal" noWrap fullWidth label="About Creator" name={`about_creator`} value={fields["about_creator"]} onChange={onChange} />
+                                    <TextField margin="normal" noWrap fullWidth label="About Creator" required name={`about_creator`} value={fields["about_creator"]} onChange={onChange} />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField margin="normal" noWrap fullWidth label="URL" required name={`url_path`} value={fields["url_path"]} onChange={onChange} />
@@ -188,10 +201,10 @@ const Members = () => {
                                     </Select>
                                 </FormControl>
                                 <FormControl fullWidth>
-                                <InputLabel>CSA Member Type</InputLabel>
+                                <InputLabel>Type</InputLabel>
                                     <Select value={fields.art_type}
                                     onChange={onChange} inputProps={{name: "art_type"}}>
-                                        <MenuItem value={"student"}>Student</MenuItem>
+                                        <MenuItem value={"teacher"}>Advisory</MenuItem>
                                     </Select>
                                 </FormControl>
                             </Grid>
@@ -202,4 +215,4 @@ const Members = () => {
     )
 }
 
-export default Members
+export default Gallery
