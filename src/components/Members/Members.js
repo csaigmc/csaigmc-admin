@@ -89,14 +89,17 @@ const Members = () => {
         <Grid key={itemIndex} item xs={12} sm={6} md={4} lg={3} classname={`${preset_styles.mx2} ${preset_styles.my2}`}>
             <Card>
                 <CardHeader 
-                    title={item.creator}
-                    subheader={item.about_creator}
+                    disableTypography
+                    title={
+                        <Typography variant="h6" noWrap={true}>
+                            {item.creator}
+                        </Typography>
+                    }
+                    subheader={<Typography noWrap variant="subtitle2">{item.about_creator}</Typography>} 
                 />
             <CardContent>
                 <Typography variant="overline">Preview</Typography>
-                <img style={{width: "100%", maxHeight: "360px"}} src={item.url_path} /> 
-                <Typography>{item.creator}</Typography>
-                <Typography variant="subtitle1">{item.about_creator}</Typography>
+                <img style={{width: "100%", height: "180px"}} src={item.url_path} /> 
                 <Typography>Created On: {fdate}</Typography>
             </CardContent>
             <CardActions disableSpacing>

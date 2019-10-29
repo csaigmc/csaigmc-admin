@@ -118,12 +118,12 @@ const Students = () => {
                         {item.first_name} {item.last_name}
                     </Typography>
                 }
-                subheader={<Typography variant="subtitle2">{item.roll_no}</Typography>} />
+                subheader={<Typography noWrap variant="subtitle2">{item.roll_no}</Typography>} />
             <CardContent>
-                <Typography>Father's Name: {item.father_name}</Typography>
-                <Typography>Mother's Name: {item.mother_name}</Typography>
-                <Typography>Contact Details: {item.country_code !== "" ? `+${item.country_code}`: ""} {item.phone_no}</Typography>
-                <Typography>Created On: {fdate}</Typography>
+                <Typography noWrap>Father's Name: {item.father_name}</Typography>
+                <Typography noWrap>Mother's Name: {item.mother_name}</Typography>
+                <Typography noWrap>Contact Details: {item.country_code !== "" ? `+${item.country_code}`: ""} {item.phone_no}</Typography>
+                <Typography noWrap>Created On: {fdate}</Typography>
             </CardContent>
             <CardActions disableSpacing>
                     <IconButton onClick={onClickEdit}>

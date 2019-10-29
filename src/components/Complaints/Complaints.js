@@ -87,11 +87,12 @@ const Complaints = () => {
         <Grid key={itemIndex} item xs={12} sm={6} md={4} lg={3} classname={`${preset_styles.mx2} ${preset_styles.my2}`}>
             <Card>
             <CardContent>
-                <Typography>{item.complaint_message}</Typography>
-                <Typography>Status: <Typography component="span" color={
+                <Typography noWrap>ID: {item._id}</Typography>
+                <Typography noWrap>{item.complaint_message}</Typography>
+                <Typography noWrap>Status: <Typography component="span" color={
                     (item.complaint_status === "pending" ? 'inherit' : (item.complaint_status === 'inprogress' ? "primary" : "error") ) 
                 }>{item.complaint_status}</Typography> </Typography>
-                <Typography>Created On: {fdate}</Typography>
+                <Typography noWrap>Created On: {fdate}</Typography>
             </CardContent>
             <CardActions disableSpacing>
                     <IconButton onClick={onClickEdit}>
