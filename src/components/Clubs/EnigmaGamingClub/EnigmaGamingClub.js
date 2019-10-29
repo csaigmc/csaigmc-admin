@@ -12,6 +12,8 @@ const GET_ENIGMA = gql`
 query AllEnigmas($options: InpOptions){
     allArticles(options: $options) {
         _id
+        author
+        about_author
         text
         title
         article_type
@@ -24,6 +26,8 @@ const UPDATE_ENIGMA = gql`
 mutation UpdateEnigma($id: ID!, $article: InpArticle) {
     updateArticle(id: $id, article:  $article) {
         _id
+        author
+        about_author
         text
         title
         article_type
@@ -46,6 +50,8 @@ mutation AddEnigma($article: InpArticle!) {
         _id
         text
         title
+        author
+        about_author
         article_type
         create_date
     }
@@ -54,13 +60,17 @@ mutation AddEnigma($article: InpArticle!) {
 const constfieldsNameList = [
     'text',
     'article_type',
-    'title'
+    'title',
+    'author',
+    'about_author'
 ]
 
 const fieldNameMapping = {
     'text': {value: "Text", required: true},
     'title': {value: "Title", required: true},
-    'article_type': {value: "Article Type", required: true}
+    'article_type': {value: "Article Type", required: true},
+    'author': {value: "Author", required: true},
+    'about_author': {value: "About Author", required: true}
 }
 
 const cStyles = makeStyles(() => ({
@@ -89,6 +99,7 @@ const EnigmaGamingClub = () => {
             <Card>
             <CardContent>
                 <Typography variant="h6" noWrap>{item.title}</Typography>
+                <Typography variant="body1" noWrap>By: {item.author}</Typography>
                 <Typography>Created On: {fdate}</Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -174,6 +185,12 @@ const EnigmaGamingClub = () => {
                                     <Typography>
                                         <ReactMarkdown source={fields['text']} />
                                     </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField margin="normal" noWrap fullWidth label="Author" required name={`author`} value={fields["author"]} onChange={onChange} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField margin="normal" noWrap fullWidth label="About Author" required name={`about_author`} value={fields["about_author"]} onChange={onChange} />
                                 </Grid>
                                 <FormControl fullWidth>
                                 <InputLabel htmlFor="age-simple">Type</InputLabel>

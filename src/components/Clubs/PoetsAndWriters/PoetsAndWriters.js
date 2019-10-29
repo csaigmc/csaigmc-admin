@@ -12,6 +12,8 @@ const GET_ISIS = gql`
 query AllArticles($options: InpOptions){
     allArticles(options: $options) {
         _id
+        author
+        about_author
         text
         title
         article_type
@@ -24,6 +26,8 @@ const UPDATE_ISIS = gql`
 mutation UpdateArticle($id: ID!, $article: InpArticle) {
     updateArticle(id: $id, article: $article) {
         _id
+        author
+        about_author
         text
         title
         article_type
@@ -44,6 +48,8 @@ const ADD_ISIS = gql`
 mutation AddArticle($article: InpArticle!) {
     addArticle(article: $article) {
         _id
+        author
+        about_author
         text
         title
         article_type
@@ -53,6 +59,8 @@ mutation AddArticle($article: InpArticle!) {
 `
 const constfieldsNameList = [
     'text',
+    'author',
+    'about_author',
     'article_type',
     'title'
 ]
@@ -60,7 +68,9 @@ const constfieldsNameList = [
 const fieldNameMapping = {
     'text': {value: "Text", required: true},
     'title': {value: "Title", required: true},
-    'article_type': {value: "Article Type", required: true}
+    'article_type': {value: "Article Type", required: true},
+    'author': {value: "Title", required: true},
+    'about_author': {value: "Title", required: true},
 }
 
 const cStyles = makeStyles(() => ({
@@ -89,6 +99,7 @@ const PoetsAndWriters = () => {
             <Card>
             <CardContent>
                 <Typography variant="h6" noWrap>{item.title}</Typography>
+                <Typography variant="body1" noWrap>By: {item.author}</Typography>
                 <Typography>Created On: {fdate}</Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -173,6 +184,12 @@ const PoetsAndWriters = () => {
                                        <Typography>
                                         <ReactMarkdown source={fields['text']}/>
                                     </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField margin="normal" noWrap fullWidth label="Author" required name={`author`} value={fields["author"]} onChange={onChange} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField margin="normal" noWrap fullWidth label="About Author" required name={`about_author`} value={fields["about_author"]} onChange={onChange} />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <FormControl fullWidth>
