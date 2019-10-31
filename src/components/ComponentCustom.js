@@ -36,7 +36,7 @@ export const ComponentCustom = ({
     dialogRender
 }) => {
 
-    const LIMIT = 40
+    const LIMIT = 12
 
     const {setLoading} = usePageLoadingContext()
     const [editData, setEditData] = useState(null)
@@ -109,12 +109,19 @@ export const ComponentCustom = ({
         console.log(".....")
     }
 
-    
-    if(loading === true) {
-        setLoading(true)
-    } else if(loading === false) {
-        setLoading(false)
-    }
+
+
+
+    useEffect(() => {
+        if(loading === true) {
+            setLoading(true)
+        } else if(loading === false) {
+            setLoading(false)
+            if(data[queryObject.query_tablename].length < LIMIT) {
+                setHasMore(false)
+            }
+        }
+    }, [loading])
 
     useEffect(() => {
         if(sup && sup.loading === false && shouldShowSnackbar === true) {
@@ -170,10 +177,8 @@ export const ComponentCustom = ({
                     cItems.push(items[j])
                 }
                 renderData.push(
-                    <Grid item xs={12}>
-                        <Grid container spacing={2}>
-                            {cItems}
-                        </Grid>
+                    <Grid container>
+                        {cItems}
                     </Grid>
                 )
             } 
@@ -183,9 +188,41 @@ export const ComponentCustom = ({
                 console.log("xxxx")
             }
             ToRender = (
-                <Grid container spacing={2}>
+                <div>
+                    <InfiniteScroll
+                    hasMore={hasMore}
+                    loader={<div>Loading More Items...</div>}
+                    endMessage={<div>Loaded All!</div>}
+                    next={() => {
+                        const res = data[queryObject.query_tablename].length / LIMIT
+                        console.log(`SKIP: ${res} | ${Math.floor(res)}`)
+                        return fetchMore({
+                        variables: {
+                            options: {
+                                skip: res,
+                                limit: LIMIT,
+                                ...queryObject.query_params
+                            }
+                        }, updateQuery: (prev, { fetchMoreResult }) => {
+                            if (!fetchMoreResult || !hasMore) return prev;
+                            console.log(prev)
+                            console.log(queryObject)
+                            console.log(fetchMoreResult)
+                            if(fetchMoreResult[queryObject.query_tablename].length < LIMIT) {
+                                setHasMore(false)
+                            }
+                            return {
+                                [queryObject.query_tablename]: [
+                                    ...prev[queryObject.query_tablename],
+                                    ...fetchMoreResult[queryObject.query_tablename]
+                                ]
+                            }
+                        }
+                    })}}>
+                        
                     {renderData}
-                </Grid>
+                    </InfiniteScroll>
+                </div>
             )
                        
         }
