@@ -110,8 +110,6 @@ export const ComponentCustom = ({
     }
 
 
-
-
     useEffect(() => {
         if(loading === true) {
             setLoading(true)
@@ -127,6 +125,7 @@ export const ComponentCustom = ({
         if(sup && sup.loading === false && shouldShowSnackbar === true) {
             setMessage(sup.error ? updateObject.error_message : updateObject.success_message)
             setShowingSnackbar(true)
+            setLoading(false)
         }
     }, [sup.loading])
 
@@ -135,6 +134,7 @@ export const ComponentCustom = ({
         if(addNews && addNews.loading === false && shouldShowSnackbar === true) {
             setMessage(addNews.error ? addObject.error_message : addObject.success_message)
             setShowingSnackbar(true)
+            setLoading(false)
         }
     }, [addNews.loading])
 
@@ -143,6 +143,7 @@ export const ComponentCustom = ({
         if(delNews && delNews.loading === false && shouldShowSnackbar === true) {
             setMessage(delNews.error ? deleteObject.error_message : deleteObject.success_message)
             setShowingSnackbar(true)
+            setLoading(false)
         }
     }, [delNews.loading])
 
@@ -177,9 +178,9 @@ export const ComponentCustom = ({
                     cItems.push(items[j])
                 }
                 renderData.push(
-                    <Grid container>
-                        {cItems}
-                    </Grid>
+                <Grid container>
+                    {cItems}
+                </Grid>
                 )
             } 
             if(__DEV__){
@@ -188,7 +189,6 @@ export const ComponentCustom = ({
                 console.log("xxxx")
             }
             ToRender = (
-                <div>
                     <InfiniteScroll
                     hasMore={hasMore}
                     loader={<div>Loading More Items...</div>}
@@ -222,7 +222,6 @@ export const ComponentCustom = ({
                         
                     {renderData}
                     </InfiniteScroll>
-                </div>
             )
                        
         }
@@ -288,7 +287,9 @@ export const ComponentCustom = ({
                         setShouldShowSnackbar(true)
                     }
                 }}/>
-            {ToRender}
+            <Grid item xs={12}>
+                {ToRender}
+            </Grid>
             <Fab className={classes.fab} color="secondary" onClick={() => {
                 setEditData(null)
                 setShowEditor(true)

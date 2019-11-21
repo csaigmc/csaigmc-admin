@@ -95,7 +95,7 @@ const PoetsAndWriters = () => {
         const fdate = `${mon}/${day}/${year}`
     
         return (
-        <Grid key={itemIndex} item xs={12} sm={6} md={4} lg={3} classname={`${preset_styles.mx2} ${preset_styles.my2}`}>
+        <Grid item key={itemIndex} xs={12} sm={6} md={4} lg={3} classname={`${preset_styles.mx2} ${preset_styles.my2}`}>
             <Card>
             <CardContent>
                 <Typography variant="h6" noWrap>{item.title}</Typography>

@@ -34,7 +34,8 @@ const titles = {
     '/admin/complaints': 'Complaints',
     '/admin/students': 'Students',
     '/admin/notifications': "Notifications",
-    '/admin/clubs/enigma': 'Enigma',
+    '/admin/papers': "Papers",
+    // '/admin/clubs/enigma': 'Enigma',
     '/admin/clubs/isis': 'ISIS',
     '/admin/clubs/memersclub': 'Memers Club',
     '/admin/clubs/arts': 'Arts',
@@ -105,6 +106,9 @@ export const Navigation = () => {
                 <ListItem button href="/admin/notifications" component={A}>
                     <ListItemText primary="Notifications" />
                 </ListItem>
+                <ListItem button href="/admin/papers" component={A}>
+                    <ListItemText primary="Papers" />
+                </ListItem>
                 <ListItem button onClick={() => {
                     setCollapseOpen(!collapseIsOpen)
                 }}>
@@ -119,9 +123,9 @@ export const Navigation = () => {
                 </ListItem>
                 <Collapse in={collapseIsOpen} timeout="auto">
                     <List component="div" disablePadding>
-                    <ListItem className={classes.nested} button href="/admin/clubs/enigma" component={A}>
+                    {/* <ListItem className={classes.nested} button href="/admin/clubs/enigma" component={A}>
                         <ListItemText primary="Enigma" />
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem className={classes.nested} button href="/admin/clubs/isis" component={A}>
                         <ListItemText  primary="ISIS" />
                     </ListItem>

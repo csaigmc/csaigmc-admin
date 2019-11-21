@@ -36,12 +36,18 @@ const Advisory = lazy(async () => {
     const data = await import('components/Advisory/Advisory')
     return data
 })
+const Papers = lazy(async () => {
+    const data = await import('components/Papers/Papers')
+    return data
+})
+
 
 export const routes = {
     '/admin/complaints': () => <Complaints />,
     '/admin/clubs*': () => <Clubs />,
     '/admin/students': () => <Students />, 
     '/admin/notifications': () => <Notifications />,
+    '/admin/papers': () => <Papers />,
     '/admin/login': () => <Login />,
     '/admin/members': () => <Members />,
     '/admin/gallery': () => <Gallery />,

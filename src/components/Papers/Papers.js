@@ -57,7 +57,7 @@ const fieldNameMapping = {
     'notification_url': {value: "URL", required: true}
 }
 
-const Notifications = () => {
+const Papers = () => {
 
     const preset_styles = useStyles()
 
@@ -114,7 +114,7 @@ const Notifications = () => {
                 query_tablename: "allNotifications",
                 forEachItem: renderHandler,
                 query_params: {
-                    type: "notification"
+                    type: "paper"
                 }
             }}
 
@@ -142,4 +142,4 @@ const Notifications = () => {
     )
 }
 
-export default Notifications
+export default Papers
