@@ -115,9 +115,9 @@ export const ComponentCustom = ({
             setLoading(true)
         } else if(loading === false) {
             setLoading(false)
-            if(data[queryObject.query_tablename].length < LIMIT) {
+            if(!data || data[queryObject.query_tablename].length < LIMIT) {
                 setHasMore(false)
-            }
+            } 
         }
     }, [loading])
 

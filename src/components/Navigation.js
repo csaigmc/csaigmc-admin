@@ -70,7 +70,7 @@ export const Navigation = () => {
 
     return (
     <header>
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Toolbar>
                 <IconButton aria-label="drawer-toggle" onClick={() => setShowingDrawer(true)}>
                     <Icon className={classes.iconStyle}>menu</Icon>

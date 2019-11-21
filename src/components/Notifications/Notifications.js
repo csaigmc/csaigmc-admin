@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentCustom } from 'components/ComponentCustom'
 import gql from 'graphql-tag'
 import CardHeader from '@material-ui/core/CardHeader'
-import { Grid, TextField, Card,  CardContent, Typography, IconButton, CardActions, Icon, Link, makeStyles } from '@material-ui/core'
+import { Grid, TextField, Card,  CardContent, Typography, IconButton, CardActions, Icon, Link, makeStyles, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 import { useStyles } from 'utils/preset_styles'
 import { fontSize } from '@material-ui/system'
 
@@ -49,15 +49,17 @@ mutation AddNotification($notification: InpNotification!) {
 `
 const constfieldsNameList = [
     'notification_text',
-    'notification_url'
+    'notification_url',
+    'notification_type'
 ]
 
 const fieldNameMapping = {
     'notification_text': {value: "Text", required: true},
-    'notification_url': {value: "URL", required: true}
+    'notification_url': {value: "URL", required: true},
+    'notification_type': {value: "Notification", required: true}
 }
 
-const Notifications = () => {
+const Papers = () => {
 
     const preset_styles = useStyles()
 
@@ -129,17 +131,29 @@ const Notifications = () => {
             fieldNameMapping={fieldNameMapping}
 
             editorRender = {(fields, onChange) => {
-                return constfieldsNameList.map((item, index) => {
-                    const fvalues = fieldNameMapping[item]
-                    return (
-                        <Grid item xs={12}>
-                            <TextField margin="normal" noWrap fullWidth label={`${fvalues.value}`} required={fvalues.required} name={`${item}`} value={fields[item]} onChange={onChange} />
-                        </Grid>        
-                        )
-                    })
+
+                return (
+                    <Grid item xs={12}>
+                        <Grid container>
+                            <Grid item xs={12}>
+                                <TextField margin="normal" noWrap fullWidth label="Text" required name={`notification_text`} value={fields["notification_text"]} onChange={onChange} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField margin="normal" noWrap fullWidth label="URL" required name={`notification_url`} value={fields["notification_url"]} onChange={onChange} />
+                            </Grid>
+                            <FormControl fullWidth>
+                            <InputLabel>Type</InputLabel>
+                                <Select value={fields['notification_type']}
+                                onChange={onChange} inputProps={{name: "notification_type"}}>
+                                    <MenuItem value={"notification"}>Notification</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                    </Grid>
+                )
             }}
         />
     )
 }
 
-export default Notifications
+export default Papers

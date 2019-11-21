@@ -34,12 +34,14 @@ function _App() {
     <Fragment>
       <Navigation />
       <ApolloProvider client={client}>
-        <Container>
-          <CssBaseline />
-          <Suspense fallback={<div>Loading...</div>}>
-            {routerResult || <NotFoundPage />}
-          </Suspense>
-        </Container>
+        <div style={{paddingTop: '76px'}}>
+          <Container>
+            <CssBaseline />
+            <Suspense fallback={<div>Loading...</div>}>
+              {routerResult || <NotFoundPage />}
+            </Suspense>
+          </Container>
+        </div>
       </ApolloProvider>
     </Fragment>
   );

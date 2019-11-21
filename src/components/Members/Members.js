@@ -8,69 +8,81 @@ import { fontSize, fontFamily } from '@material-ui/system'
 import ReactMarkdown from 'react-markdown'
 
 
-const GET_ARTS = gql`
-query AllArts($options: InpOptions){
-    allArts(options: $options) {
+const GET_USERS = gql`
+query AllUsers($options: InpOptions){
+    allUsers(options: $options) {
         _id
-        creator
-        about_creator
+        user
+        about_user
         url_path
-        art_format
-        art_type
+        user_type
+        phone_no
+        email
         create_date
     }
 }
 `
 
-const UPDATE_ART = gql`
-mutation UpdateArts($id: ID!, $art: InpArt) {
-    updateArt(id: $id, art:  $art) {
+const UPDATE_USER = gql`
+mutation UpdateUsers($id: ID!, $user: InpUser) {
+    updateUser(id: $id, user:  $user) {
         _id
-        creator
-        about_creator
+        user
+        about_user
         url_path
-        art_type
-        art_format
+        user_type
+        phone
+        email
         create_date
     }   
 }
 `
 
-const DELETE_ART = gql`
-mutation DeleteArt($id: ID!) {
-    deleteArt(id: $id){
+const DELETE_USER = gql`
+mutation DeleteUser($id: ID!) {
+    deleteUser(id: $id){
         _id
     }
 }
 `
 
-const ADD_ART = gql`
-mutation AddArt($art: InpArt!) {
-    addArt(art: $art) {
+const ADD_USER = gql`
+mutation AddUser($user: InpUser!) {
+    addUser(user: $user) {
         _id
-        creator
-        about_creator
+        user
+        about_user
         url_path
-        art_type
-        art_format
+        user_type
+        phone_no
+        email
         create_date
     }
 }
 `
 const constfieldsNameList = [
-    'creator',
-    'about_creator',
+    'user',
+    'about_user',
     'url_path',
-    'art_type',
-    'art_format'
+    'user_type',
+    'phone_no',
+    'email'
 ]
 
 const fieldNameMapping = {
-    'creator': {value: "Creator", required: true},
-    'about_creator': {value: "About Creator", required: true},
+    'user': {value: "Creator", required: true},
+    'about_user': {value: "About Creator", required: true},
     'url_path': {value: "URL path", required: true},
-    "art_format": {value: "Format", required: true}
+    'user_type': {value: "User Type", required: true},
+    "phone_no": {value: "Phone", required: true},
+    'email': {value: "Email", required: true}
 }
+
+const cStyles = makeStyles(() => ({
+    editor: {
+        fontFamily: "IBM Plex Mono, ubuntu mono, consolas, source code pro, monospace !important"
+    }
+}))
 
 const Members = () => {
 
@@ -86,20 +98,26 @@ const Members = () => {
         const fdate = `${mon}/${day}/${year}`
     
         return (
-        <Grid key={itemIndex} item xs={12} sm={6} md={4} lg={3} classname={`${preset_styles.mx2} ${preset_styles.my2}`}>
+        <Grid key={itemIndex} item xs={12} sm={6} lg={3} classname={`${preset_styles.mx2} ${preset_styles.my2}`}>
             <Card>
                 <CardHeader 
                     disableTypography
                     title={
                         <Typography variant="h6" noWrap={true}>
-                            {item.creator}
+                            {item.user}
                         </Typography>
                     }
-                    subheader={<Typography noWrap variant="subtitle2">{item.about_creator}</Typography>} 
+                    subheader={
+                        <>
+                            <Typography noWrap variant="subtitle2">{item.about_user}</Typography>
+                            <Typography noWrap variant="subtitle2">{item.phone_no}</Typography>
+                            <Typography noWrap variant="subtitle2">{item.email}</Typography>
+                        </>
+                    } 
                 />
             <CardContent>
                 <Typography variant="overline">Preview</Typography>
-                <img style={{width: "100%", height: "180px"}} src={item.url_path} /> 
+                {<img style={{width: "100%", height: "180px", objectFit: "cover"}} src={item.url_path} />}
                 <Typography>Created On: {fdate}</Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -117,25 +135,25 @@ const Members = () => {
     return (
         <ComponentCustom 
             updateObject={{
-                update_query: UPDATE_ART,
-                error_message: "Error Upadting Student",
-                success_message: "Updated student!",
+                update_query: UPDATE_USER,
+                error_message: "Error Upadting User",
+                success_message: "Updated User!",
                 update_var_unique: "id",
-                update_var_info: "art"
+                update_var_info: "user"
             }}
 
             deleteObject={{
-                delete_query: DELETE_ART,
+                delete_query: DELETE_USER,
                 delete_unique_var: "id",
                 delete_unique_field: "_id",
-                error_message: "Error deleting Student",
-                success_message: "Deleted Meme!"
+                error_message: "Error deleting User",
+                success_message: "Deleted User!"
             }}
 
             queryObject={{
-                query_query: GET_ARTS,
+                query_query: GET_USERS,
                 query_unique_field: "_id",
-                query_tablename: "allArts",
+                query_tablename: "allUsers",
                 forEachItem: renderHandler,
                 query_params: {
                     type: "student"
@@ -143,10 +161,10 @@ const Members = () => {
             }}
 
             addObject={{
-                add_query: ADD_ART,
-                error_message: "Error Adding Student",
-                success_message: "Added Student",
-                add_var_info: "art"
+                add_query: ADD_USER,
+                error_message: "Error Adding User",
+                success_message: "Added User",
+                add_var_info: "user"
             }}
 
             constfieldsNameList = {constfieldsNameList}
@@ -175,25 +193,24 @@ const Members = () => {
                         <Grid item xs={12}>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <TextField margin="normal" noWrap fullWidth label="Creator" name={`creator`} value={fields["creator"]} onChange={onChange} />
+                                    <TextField margin="normal" noWrap fullWidth label="User" required name={`user`} value={fields["user"]} onChange={onChange} />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <TextField margin="normal" noWrap fullWidth label="About Creator" name={`about_creator`} value={fields["about_creator"]} onChange={onChange} />
+                                    <TextField margin="normal" noWrap fullWidth label="About User" required name={`about_user`} value={fields["about_user"]} onChange={onChange} />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField margin="normal" noWrap fullWidth label="URL" required name={`url_path`} value={fields["url_path"]} onChange={onChange} />
                                 </Grid>
+                                <Grid item xs={12}>
+                                    <TextField margin="normal" noWrap fullWidth label="Phone no" name={`phone_no`} value={fields["phone_no"]} onChange={onChange} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField margin="normal" noWrap fullWidth label="Email" name={`email`} value={fields["email"]} onChange={onChange} />
+                                </Grid>
                                 <FormControl fullWidth>
-                                <InputLabel>Format</InputLabel>
-                                    <Select value={fields.art_format}
-                                    onChange={onChange} inputProps={{name: "art_format"}}>
-                                        <MenuItem value={"image"}>Image</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl fullWidth>
-                                <InputLabel>CSA Member Type</InputLabel>
-                                    <Select value={fields.art_type}
-                                    onChange={onChange} inputProps={{name: "art_type"}}>
+                                <InputLabel>Type</InputLabel>
+                                    <Select value={fields['user_type']}
+                                    onChange={onChange} inputProps={{name: "user_type"}}>
                                         <MenuItem value={"student"}>Student</MenuItem>
                                     </Select>
                                 </FormControl>
