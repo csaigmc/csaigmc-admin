@@ -31,7 +31,7 @@ mutation UpdateUsers($id: ID!, $user: InpUser) {
         about_user
         url_path
         user_type
-        phone
+        phone_no
         email
         create_date
     }   

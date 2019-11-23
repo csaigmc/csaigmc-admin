@@ -11,6 +11,7 @@ const GET_NOTIFICATIONS = gql`
 query AllNotifications($options: InpOptions){
     allNotifications(options: $options) {
         _id
+        notification_type
         notification_text
         notification_url
         create_date
@@ -24,6 +25,7 @@ mutation UpdateNotification($id: ID!, $notification: InpNotification) {
         _id
         notification_text
         notification_url
+        notification_type
         create_date
     }   
 }
@@ -43,6 +45,7 @@ mutation AddNotification($notification: InpNotification!) {
         _id
         notification_text
         notification_url
+        notification_type
         create_date
     }
 }

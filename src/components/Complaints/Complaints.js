@@ -119,7 +119,7 @@ const Complaints = () => {
             deleteObject={{
                 delete_query: DELETE_COMPLAINT,
                 delete_unique_var: "id",
-                delete_unique_field: "id",
+                delete_unique_field: "_id",
                 error_message: "Error deleting Complaint",
                 success_message: "Deleted Complaint!"
             }}

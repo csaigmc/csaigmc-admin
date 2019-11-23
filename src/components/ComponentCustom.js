@@ -74,9 +74,9 @@ export const ComponentCustom = ({
             console.log(data)
             // console.log(queryData)
 
-            cache.writeQuery({
-                query: queryObject
-            })
+            // cache.writeQuery({
+            //     query: queryObject
+            // })
         }
     })
     const [addDetails, addNews] = useMutation(addObject.add_query, {
@@ -164,13 +164,29 @@ export const ComponentCustom = ({
                 </Grid>
             )
         } else {
-            const items = data[queryObject.query_tablename].map((item, itemIndex) => queryObject.forEachItem(item, itemIndex, () => {
-                                setEditData(itemIndex)
-                                setShowEditor(true)
-                            }, () => {
-                            deleteDetails({variables: {[deleteObject.delete_unique_var]: item[deleteObject.delete_unique_field]}})
-                                setShouldShowSnackbar(true)
-                            }, setShowExpanded))
+            const items = data[queryObject.query_tablename].map(
+                (item, itemIndex) => queryObject.forEachItem(
+                    item, 
+                    itemIndex,
+                    () => {
+                            setEditData(itemIndex)
+                            setShowEditor(true)
+                        },
+                    () => {
+                        if(__DEV__){
+                            console.log(".........")
+                            console.log(item)
+                            console.log(deleteObject.delete_unique_field)
+                            console.log(deleteObject.delete_unique_var)
+                            console.log(item[deleteObject.delete_unique_field])
+                            console.log("..........")
+                        }
+                        deleteDetails({variables: {[deleteObject.delete_unique_var]: item[deleteObject.delete_unique_field]}})
+                        setShouldShowSnackbar(true)
+                    }, 
+                    setShowExpanded
+                )
+            )
             const renderData = []
             for(let i = 0; i < data[queryObject.query_tablename].length; i+=4){
                 const cItems = []
